@@ -5,7 +5,7 @@ const getThanos = async () => {
     const available = await ThanosWallet.isAvailable();
 
     if (!available) {
-      throw new Error('Thanos Wallet not installed');
+      throw new Error('Please connect Thanos Wallet');
     }
 
     const wallet = new ThanosWallet('My Super DApp');
