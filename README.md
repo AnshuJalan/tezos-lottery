@@ -16,7 +16,7 @@
 
 - Each ticket costs 1 XTZ.
 
-- When all tickets are sold, a winner is chosen at random
+- When all tickets are sold, a winner is chosen at random and 5 XTZ is transferred to the winner. 
 
 - A person can buy more than one ticket.
 
