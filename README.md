@@ -18,7 +18,10 @@
 
 - When all tickets are sold, a winner is chosen at random and 5 XTZ is transferred to the winner. 
 
-- A person can buy more than one ticket.
+- The lottery is reset, and a new round starts. 
+
+- A person can buy more than one ticket. If a person tries to buy more tickets than what is available, the extra XTZ sent to the
+contract is refunded back.
 
 # Tools Used:
 
@@ -27,7 +30,7 @@
 
 ## Setup & Run Steps :
 
-1. The dapp required Thanos Wallet
+1. The dapp requires Thanos Wallet
 
 2. `npm install` it will install all your dependencies
 
