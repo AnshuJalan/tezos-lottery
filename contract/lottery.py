@@ -1,7 +1,7 @@
 import smartpy as sp
 
-#Functionalities: 
-# 0.01 XTZ per lottery ticket
+# Functionalities: 
+# 1 XTZ per lottery ticket
 # Max 5
 class SimpleLottery(sp.Contract):
     def __init__(self):
