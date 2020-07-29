@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import LotteryContext from '../context/lottery/lotteryContext';
 
-const Navbar = ({ account }) => {
+const Navbar = () => {
+  const lotteryContext = useContext(LotteryContext);
+
   return (
     <div className='navbar navbar-dark bg-dark mb-3'>
       <h1 className='navbar-brand'>
-        <i class='fa fa-ticket' /> Tez Lottery
+        <i className='fa fa-ticket' /> Tez Lottery
       </h1>
       <ul className='navbar-nav'>
         <li className='text-white'>
-          <i class='fa fa-user-circle-o' /> {account}
+          <i className='fa fa-user-circle-o' /> {lotteryContext.account}
         </li>
       </ul>
     </div>

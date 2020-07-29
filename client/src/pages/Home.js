@@ -1,17 +1,30 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useRef, useContext, useEffect } from 'react';
+import LotteryContext from '../context/lottery/lotteryContext';
+const Home = () => {
+  const amount = useRef('');
 
-const Home = ({
-  balance,
-  limit,
-  remaining,
-  buyTicket,
-  buyers,
-  prev,
-  buttonLoading,
-}) => {
-  const [amount, setAmount] = useState('');
+  const lotteryContext = useContext(LotteryContext);
+  const {
+    buyers,
+    prev,
+    limit,
+    remaining,
+    balance,
+    buttonLoading,
+    buyTicket,
+    pageLoading,
+    getWallet,
+    getData,
+  } = lotteryContext;
 
-  const onChange = (e) => setAmount(e.target.value);
+  useEffect(() => {
+    const setup = async () => {
+      await getWallet();
+      await getData();
+    };
+    setup();
+    //eslint-disable-next-line
+  }, []);
 
   const getTickerBuyers = () => {
     return buyers.map((buyer) => (
@@ -30,32 +43,56 @@ const Home = ({
     ));
   };
 
+  if (pageLoading) {
+    return (
+      <div className='text-center mt-5'>
+        <span className='spinner-border' />
+      </div>
+    );
+  }
+
   return (
     <Fragment>
       <div className='grid'>
         <div className='row mb-2 text-center'>
           <div className='col-md-6'>
             <h2>Buy Tickets</h2>
-            <p>Your Balance: {balance} XTZ </p>
-            <p>Ticket Cost: 1 XTZ / ticket</p>
+            <div className='row text-left'>
+              <div className='col-sm-6'>
+                <p>
+                  <strong>Tickets Limit:</strong> {limit}
+                </p>
+                <p>
+                  <strong>Your Balance:</strong> {balance} XTZ{' '}
+                </p>
+              </div>
+              <div className='col-sm-6'>
+                <p>
+                  <strong>Remaining</strong>: {remaining}
+                </p>
+                <p>
+                  <strong>Ticket Cost:</strong> 1 XTZ / ticket
+                </p>
+              </div>
+            </div>
 
-            <div class='input-group mb-3'>
+            <div className='input-group mb-3'>
               <input
-                type='text'
-                class='form-control'
+                type='number'
+                className='form-control'
                 placeholder='Number of tickets...'
-                value={amount}
-                onChange={onChange}
+                ref={amount}
               />
-              <div class='input-group-append'>
+              <div className='input-group-append'>
                 <button
                   onClick={() => buyTicket(parseInt(amount))}
-                  class='btn btn-dark'
+                  className='btn btn-dark'
                   type='button'
                 >
                   {buttonLoading ? (
                     <span>
-                      <div class='spinner-border spinner-border-sm' /> Buying..
+                      <div className='spinner-border spinner-border-sm' />{' '}
+                      Buying..
                     </span>
                   ) : (
                     <span>Buy</span>
@@ -75,9 +112,6 @@ const Home = ({
             </table>
           </div>
           <div className='col-md-6'>
-            <h2 className='text-center'>Current Lottery</h2>
-            <p>Tickets Limit: {limit}</p>
-            <p>Remaining: {remaining}</p>
             <h2 className='text-center'>Previous Winners</h2>
             <div>{getPreviousWinners()}</div>
           </div>
