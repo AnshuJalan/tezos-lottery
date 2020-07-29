@@ -30,7 +30,7 @@ export default (state, action) => {
         buttonLoading: true,
       };
     case BUY_SUCCESS:
-      return window.location.reload();
+      return { ...state, buttonLoading: false };
     case BUY_TERMINATE:
       return {
         ...state,

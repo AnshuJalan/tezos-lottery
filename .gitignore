@@ -15,6 +15,7 @@
 /test-build
 
 # misc
+.DS_Store
 /client/.DS_Store
 /client/.env.local
 /client/.env.development.local
@@ -24,4 +25,7 @@
 /client/npm-debug.log*
 /client/yarn-debug.log*
 /client/yarn-error.log*
+
+#vs_code
+./.vscode
 

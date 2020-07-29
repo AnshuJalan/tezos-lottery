@@ -65,7 +65,7 @@ const LotteryState = (props) => {
 
       dispatch({ type: GET_DATA, payload: payload });
     } catch (err) {
-      alert(err);
+      alert(err.message);
     }
   };
 
@@ -80,8 +80,11 @@ const LotteryState = (props) => {
       await buyOperation.confirmation();
 
       dispatch({ type: BUY_SUCCESS });
+
+      window.location.reload();
     } catch (err) {
-      alert(err);
+      console.log(err);
+      alert(err.message);
     }
 
     dispatch({ type: BUY_TERMINATE });

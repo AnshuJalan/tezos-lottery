@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useContext, useEffect } from 'react';
 import LotteryContext from '../context/lottery/lotteryContext';
 const Home = () => {
-  const amount = useRef('');
+  const amount = useRef(0);
 
   const lotteryContext = useContext(LotteryContext);
   const {
@@ -85,7 +85,7 @@ const Home = () => {
               />
               <div className='input-group-append'>
                 <button
-                  onClick={() => buyTicket(parseInt(amount))}
+                  onClick={() => buyTicket(parseInt(amount.current.value))}
                   className='btn btn-dark'
                   type='button'
                 >
@@ -108,7 +108,15 @@ const Home = () => {
                   <th>Buyer</th>
                 </tr>
               </thead>
-              <tbody>{getTickerBuyers()}</tbody>
+              <tbody>
+                {buyers.length > 0 ? (
+                  getTickerBuyers()
+                ) : (
+                  <tr>
+                    <td colSpan={2}>No Buyers Yet.</td>
+                  </tr>
+                )}
+              </tbody>
             </table>
           </div>
           <div className='col-md-6'>
