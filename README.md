@@ -27,6 +27,7 @@ contract is refunded back.
 
 - Bundle React
 - Thanos Wallet
+- Taquito (for ConseilJS implementation, refer to [master](https://github.com/AnshuJalan/tezos-lottery/tree/master) branch)
 
 ## Setup & Run Steps :
 
