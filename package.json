@@ -24,7 +24,7 @@
   "author": "Anshu Jalan",
   "license": "MIT",
   "dependencies": {
-    "@taquito/taquito": "^6.3.0-wallet.3",
+    "@taquito/taquito": "^6.3.0-wallet.4",
     "bs58check": "^2.1.2",
     "chalk": "^4.1.0",
     "conseiljs": "0.4.3",

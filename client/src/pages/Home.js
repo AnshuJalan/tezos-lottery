@@ -28,9 +28,9 @@ const Home = () => {
 
   const getTickerBuyers = () => {
     return buyers.map((buyer) => (
-      <tr key={parseInt(buyer.args[0].int)}>
-        <td>{parseInt(buyer.args[0].int) + 1}</td>
-        <td>{buyer.args[1].string}</td>
+      <tr key={parseInt(buyer[0].slice(1, -1))}>
+        <td>{parseInt(buyer[0].slice(1, -1)) + 1}</td>
+        <td>{buyer[1]}</td>
       </tr>
     ));
   };
@@ -38,7 +38,7 @@ const Home = () => {
   const getPreviousWinners = () => {
     return prev.map((winner, index) => (
       <div className='card w-75 m-auto py-3' key={index}>
-        {winner.string}
+        {winner}
       </div>
     ));
   };

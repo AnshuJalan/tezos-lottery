@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { TezosNodeReader } from 'conseiljs';
+import { Tezos } from '@taquito/taquito';
 import getThanos from '../../utils/getThanos';
 import LotteryReducer from './lotteryReducer';
 import LotteryContext from './lotteryContext';
@@ -12,6 +12,9 @@ import {
   BUY_TERMINATE,
   BUY_SUCCESS,
 } from '../types';
+
+//Provider for Tezos
+Tezos.setProvider({ rpc: chainConfig.RPC });
 
 const LotteryState = (props) => {
   const initialState = {
@@ -48,8 +51,28 @@ const LotteryState = (props) => {
     }
   };
 
-  //GET DATA
+  //GET DATA TAQUITO
   const getData = async () => {
+    try {
+      const contract = await Tezos.contract.at(chainConfig.CONTRACT);
+
+      const storage = await contract.storage();
+
+      const payload = {
+        remaining: storage.limit.toNumber() - storage.id.toNumber(),
+        limit: storage.limit.toNumber(),
+        prev: storage.previousWinners,
+        buyers: Array.from(storage.ticketToAddress.valueMap),
+      };
+
+      dispatch({ type: GET_DATA, payload: payload });
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  //GET DATA CONSEILJS
+  /*const getData = async () => {
     try {
       const data = await TezosNodeReader.getContractStorage(
         chainConfig.RPC,
@@ -67,7 +90,7 @@ const LotteryState = (props) => {
     } catch (err) {
       alert(err.message);
     }
-  };
+  };*/
 
   //BUY TICKET
   const buyTicket = async (amount) => {
